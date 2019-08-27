@@ -1,5 +1,9 @@
 # Kanzen - A Completeness Check Gem
 
+<a href="https://codeclimate.com/github/caws/kanzen/maintainability"><img src="https://api.codeclimate.com/v1/badges/4acb9bf12efa620f46dd/maintainability" /></a>
+[![Build Status](https://travis-ci.org/caws/kanzen.svg?branch=master)](https://travis-ci.org/caws/kanzen)
+
+
 ### What is this?
 
 This is a gem that gives you a sense of how complete a given model is. 
