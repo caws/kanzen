@@ -38,7 +38,7 @@ Below is what's currently doable:
 Add the following to your Gemfile
 
 ``` ruby
-gem 'kanzen'
+gem 'kanzen', '~> 0.1.0'
 ```
 Then run:
 
