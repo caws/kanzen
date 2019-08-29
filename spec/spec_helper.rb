@@ -1,4 +1,10 @@
+require 'codeclimate-test-reporter'
 require "bundler/setup"
+require 'simplecov'
+SimpleCov.formatter = CodeClimate::TestReporter::Formatter if ENV['CIRCLE_ARTIFACTS']
+SimpleCov.start do
+  add_filter 'spec'
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

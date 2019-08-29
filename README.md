@@ -1,8 +1,9 @@
 # Kanzen - A Completeness Check Gem
 
-<a href="https://codeclimate.com/github/caws/kanzen/maintainability"><img src="https://api.codeclimate.com/v1/badges/4acb9bf12efa620f46dd/maintainability" /></a>
+[![Maintainability](https://api.codeclimate.com/v1/badges/4acb9bf12efa620f46dd/maintainability)](https://codeclimate.com/github/caws/kanzen/maintainability)
 [![Build Status](https://travis-ci.org/caws/kanzen.svg?branch=master)](https://travis-ci.org/caws/kanzen)
-
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4acb9bf12efa620f46dd/test_coverage)](https://codeclimate.com/github/caws/kanzen/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/kanzen.svg)](https://badge.fury.io/rb/kanzen)
 
 ### What is this?
 
