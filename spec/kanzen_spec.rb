@@ -39,6 +39,14 @@ RSpec.describe Kanzen do
     it '#missing_attributes should contain expected keys' do
       expect(complete_user.missing_attributes).to match({})
     end
+
+    it '#number_of_present_attributes should equal to eight' do
+      expect(complete_user.number_of_present_attributes).to match(8)
+    end
+
+    it '#number_of_missing_attributes should be zero' do
+      expect(complete_user.number_of_missing_attributes).to match(0)
+    end
   end
 
   context 'with an INCOMPLETE model' do
@@ -60,6 +68,14 @@ RSpec.describe Kanzen do
 
     it '#missing_attributes should contain expected keys' do
       expect(incomplete_user.missing_attributes).to match({"user" => ["name"]})
+    end
+
+    it '#number_of_present_attributes should equal to zero' do
+      expect(incomplete_user.number_of_present_attributes).to match(0)
+    end
+
+    it '#number_of_missing_attributes should be one (id is present)' do
+      expect(incomplete_user.number_of_missing_attributes).to match(1)
     end
   end
 
@@ -87,7 +103,7 @@ RSpec.describe Kanzen do
     end
 
     it '#present_attributes should contain expected keys' do
-      expect(incomplete_proc_user.present_attributes(proc: custom_proc)).to match("user"=>["name"])
+      expect(incomplete_proc_user.present_attributes(proc: custom_proc)).to match("user" => ["name"])
     end
 
     it '#missing_attributes should contain expected keys' do
