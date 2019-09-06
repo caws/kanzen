@@ -61,6 +61,16 @@ module Kanzen
     kanzen_calculation(proc, ignore_list).missing_attributes
   end
 
+  # Returns the number of present attributes
+  def number_of_present_attributes(proc: DEFAULT_PROC, ignore_list: DEFAULT_IGNORE_LIST)
+    kanzen_calculation(proc, ignore_list).number_of_present_attributes
+  end
+
+  # Returns the number of missing attributes
+  def number_of_missing_attributes(proc: DEFAULT_PROC, ignore_list: DEFAULT_IGNORE_LIST)
+    kanzen_calculation(proc, ignore_list).number_of_missing_attributes
+  end
+
   private
 
   def kanzen_calculation(proc, *ignore_list)
