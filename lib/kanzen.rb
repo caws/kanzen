@@ -11,41 +11,36 @@ module Kanzen
   # passed.
   DEFAULT_IGNORE_LIST = [:id, :created_at, :updated_at]
 
+  # This is the default proc used to determine if a
+  # given attribute is valid or not.
+  # We convert attributes to string and since nils
+  # are converted to "", we can compare that to see
+  # if a given attribute is different from an empty
+  # string literal
+  DEFAULT_PROC = Proc.new do |value|
+    value.to_s != ""
+  end
+
   # Returns true if the model and its associations are
   # all filled.
   #
   # A proc containing a comparison can also be passed
   # in order to define if a given attribute is valid or
   # not.
-  def completed?(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
-    if proc
-      return custom_kanzen_calculation(proc, ignore_list)
-                 .completed?
-    end
-
-    kanzen_calculation(ignore_list).completed?
+  def completed?(proc: DEFAULT_PROC, ignore_list: DEFAULT_IGNORE_LIST)
+    kanzen_calculation(proc, ignore_list).completed?
   end
 
   # Returns a percentage value for the amount of
   # missing attributes.
-  def percentage_missing(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
-    if proc
-      return custom_kanzen_calculation(proc, ignore_list)
-                 .percentage_missing
-    end
-
-    kanzen_calculation(ignore_list).percentage_missing
+  def percentage_missing(proc: DEFAULT_PROC, ignore_list: DEFAULT_IGNORE_LIST)
+    kanzen_calculation(proc, ignore_list).percentage_missing
   end
 
   # Returns a percentage value for the amount of
   # present attributes.
-  def percentage_present(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
-    if proc
-      return custom_kanzen_calculation(proc, ignore_list)
-                 .percentage_present
-    end
-
-    kanzen_calculation(ignore_list).percentage_present
+  def percentage_present(proc: DEFAULT_PROC, ignore_list: DEFAULT_IGNORE_LIST)
+    kanzen_calculation(proc, ignore_list).percentage_present
   end
 
   # Returns a hash containing a list of present
@@ -53,13 +48,8 @@ module Kanzen
   # the order:
   #
   # your_hash[:model_class] = attribute_name
-  def present_attributes(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
-    if proc
-      return custom_kanzen_calculation(proc, ignore_list)
-                 .present_attributes
-    end
-
-    kanzen_calculation(ignore_list).present_attributes
+  def present_attributes(proc: DEFAULT_PROC, ignore_list: DEFAULT_IGNORE_LIST)
+    kanzen_calculation(proc, ignore_list).present_attributes
   end
 
   # Returns hash containing a list of missing
@@ -67,22 +57,13 @@ module Kanzen
   # the order:
   #
   # your_hash[:model_class] = attribute_name
-  def missing_attributes(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
-    if proc
-      return custom_kanzen_calculation(proc, ignore_list)
-                 .missing_attributes
-    end
-
-    kanzen_calculation(ignore_list).missing_attributes
+  def missing_attributes(proc: DEFAULT_PROC, ignore_list: DEFAULT_IGNORE_LIST)
+    kanzen_calculation(proc, ignore_list).missing_attributes
   end
 
   private
 
-  def kanzen_calculation(*ignore_list)
-    Kanzen::Inspection.new(self, nil, ignore_list).completion_check
-  end
-
-  def custom_kanzen_calculation(proc, *ignore_list)
+  def kanzen_calculation(proc, *ignore_list)
     Kanzen::Inspection.new(self, proc, ignore_list).completion_check
   end
 end
