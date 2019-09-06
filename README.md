@@ -7,6 +7,8 @@
 
 ### What is this?
 
+Demonstration: https://kanzen-example.herokuapp.com/
+
 This is a gem that gives you a sense of how complete a given model is. 
 
 It checks a given model attributes, its relationships and its relationships' attributes and so on and so 
