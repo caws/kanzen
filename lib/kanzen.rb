@@ -3,13 +3,21 @@ require_relative 'kanzen/inspection'
 require_relative 'kanzen/version'
 
 module Kanzen
+  # These are fields that, for the most part, won't be taken
+  # into consideration when calculating the percentage
+  # completed for a given model.
+  #
+  # PS: They are ignored when a custom ignore_list is
+  # passed.
+  DEFAULT_IGNORE_LIST = [:id, :created_at, :updated_at]
+
   # Returns true if the model and its associations are
   # all filled.
   #
   # A proc containing a comparison can also be passed
   # in order to define if a given attribute is valid or
   # not.
-  def completed?(proc: nil, ignore_list: nil)
+  def completed?(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
     if proc
       return custom_kanzen_calculation(proc, ignore_list)
                  .completed?
@@ -20,7 +28,7 @@ module Kanzen
 
   # Returns a percentage value for the amount of
   # missing attributes.
-  def percentage_missing(proc: nil, ignore_list: nil)
+  def percentage_missing(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
     if proc
       return custom_kanzen_calculation(proc, ignore_list)
                  .percentage_missing
@@ -31,7 +39,7 @@ module Kanzen
 
   # Returns a percentage value for the amount of
   # present attributes.
-  def percentage_present(proc: nil, ignore_list: nil)
+  def percentage_present(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
     if proc
       return custom_kanzen_calculation(proc, ignore_list)
                  .percentage_present
@@ -45,7 +53,7 @@ module Kanzen
   # the order:
   #
   # your_hash[:model_class] = attribute_name
-  def present_attributes(proc: nil, ignore_list: nil)
+  def present_attributes(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
     if proc
       return custom_kanzen_calculation(proc, ignore_list)
                  .present_attributes
@@ -59,7 +67,7 @@ module Kanzen
   # the order:
   #
   # your_hash[:model_class] = attribute_name
-  def missing_attributes(proc: nil, ignore_list: nil)
+  def missing_attributes(proc: nil, ignore_list: DEFAULT_IGNORE_LIST)
     if proc
       return custom_kanzen_calculation(proc, ignore_list)
                  .missing_attributes
