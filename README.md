@@ -36,6 +36,8 @@ Below is what's currently doable:
   - return number of present/missing attributes
   - return a list of present/missing attributes (as hashes)
 
+PS: This doesn't take the attributes :id, :created_at and :updated_at into consideration when calculating the completeness.
+
 ## Installation
 
 ### Instalation
@@ -43,7 +45,7 @@ Below is what's currently doable:
 Add the following to your Gemfile
 
 ``` ruby
-gem 'kanzen', '~> 0.1.0'
+gem 'kanzen', '~> 0.2.0'
 ```
 Then run:
 
@@ -51,11 +53,11 @@ Then run:
 bundle install
 ```
 
-Prepend Kanzen to your model:
+Include Kanzen in your model:
 
 ``` ruby
 class Address < ApplicationRecord
-  prepend Kanzen
+  include Kanzen
   ...
 end
 ```
@@ -105,7 +107,7 @@ end
 puts random_address.completed?
 
 # prints false, because street.to_s equals "" and is evaluated as invalid according 
-to the custom_proc passed
+# to the custom_proc passed
 puts random_address.completed?(proc: custom_proc) 
 ``` 
 

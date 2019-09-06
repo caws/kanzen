@@ -31,9 +31,9 @@ RSpec.describe Kanzen do
     end
 
     it '#present_attributes should contain expected keys' do
-      expect(complete_user.present_attributes).to match("address" => ["id", "city", "country", "user_id"],
-                                                        "car" => ["id", "make", "user_id", "id", "make", "user_id"],
-                                                        "user" => ["id", "name"])
+      expect(complete_user.present_attributes).to match("address" => ["city", "country", "user_id"],
+                                                        "car" => ["make", "user_id", "make", "user_id"],
+                                                        "user" => ["name"])
     end
 
     it '#missing_attributes should contain expected keys' do
@@ -46,16 +46,16 @@ RSpec.describe Kanzen do
       expect(incomplete_user.completed?).to eq(false)
     end
 
-    it '#percentage_present should return 50.0' do
-      expect(incomplete_user.percentage_present).to eq(50.0)
+    it '#percentage_present should return 0.0' do
+      expect(incomplete_user.percentage_present).to eq(0.0)
     end
 
-    it '#percentage_missing should return 50.0' do
-      expect(incomplete_user.percentage_missing).to eq(50.0)
+    it '#percentage_missing should return 100.0' do
+      expect(incomplete_user.percentage_missing).to eq(100.0)
     end
 
     it '#present_attributes should contain expected keys' do
-      expect(incomplete_user.present_attributes).to match("user" => ["id"])
+      expect(incomplete_user.present_attributes).to match({})
     end
 
     it '#missing_attributes should contain expected keys' do
@@ -87,7 +87,7 @@ RSpec.describe Kanzen do
     end
 
     it '#present_attributes should contain expected keys' do
-      expect(incomplete_proc_user.present_attributes(proc: custom_proc)).to match("user"=>["id", "name"])
+      expect(incomplete_proc_user.present_attributes(proc: custom_proc)).to match("user"=>["name"])
     end
 
     it '#missing_attributes should contain expected keys' do
