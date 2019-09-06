@@ -75,7 +75,6 @@ RSpec.describe Kanzen do
     end
 
     it '#number_of_missing_attributes should be one (id is present)' do
-      puts incomplete_user.as_json
       expect(incomplete_user.number_of_missing_attributes).to match(1)
     end
   end
