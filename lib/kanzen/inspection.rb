@@ -68,21 +68,11 @@ module Kanzen
     end
 
     def is_attribute_valid?(another_model, attribute)
-      # Check if a custom verification (proc) was passed to verify if the
-      # attribute is valid.
-      #
       # The proc must return TRUE if a given attribute
       # is VALID and FLASE if it IS INVALID
-      if proc
-        attribute_value = another_model.send(attribute)
+      attribute_value = another_model.send(attribute)
 
-        return proc.call(attribute_value)
-      end
-
-      # If a proc wasn't passed, just check if the attribute is nil
-      # If the attribute is NIL, it means that it is INVALID
-      # If the attribute is NOT NIL, it means that it is VALID
-      !another_model.send(attribute).nil?
+      proc.call(attribute_value)
     end
 
     # Check attributes
