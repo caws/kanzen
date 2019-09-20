@@ -80,7 +80,7 @@ RSpec.describe Kanzen do
   end
 
   context 'with a custom proc and an INCOMPLETE model' do
-    custom_proc = Proc.new do |attribute_name, value|
+    custom_proc = Proc.new do |attribute_name, value, model|
       # If the value equals to "" or nil,
       # I think it is valid.
       if value == "" || value != nil
