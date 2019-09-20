@@ -17,7 +17,7 @@ module Kanzen
   # are converted to "", we can compare that to see
   # if a given attribute is different from an empty
   # string literal
-  DEFAULT_PROC = Proc.new do |attribute_name, value|
+  DEFAULT_PROC = Proc.new do |attribute_name, value, model|
     value.to_s != ""
   end
 
