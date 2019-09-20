@@ -72,7 +72,7 @@ module Kanzen
       # is VALID and FLASE if it IS INVALID
       attribute_value = another_model.send(attribute)
 
-      proc.call(attribute_value)
+      proc.call(attribute, attribute_value)
     end
 
     # Check attributes
